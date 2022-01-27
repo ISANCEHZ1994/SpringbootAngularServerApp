@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
           dataState: DataState.LOADED_STATE, appData: response
         }
       }),
-      startWith({ dataState: DataState.LOADED_STATE }),
+      startWith({ dataState: DataState.LOADING_STATE }),
       catchError(( error: string ) => {
         return of({ dataState: DataState.ERROR_STATE, error: error })
       })
