@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { CustomResponse } from '../interface/custom-response';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subscriber, throwError } from 'rxjs';
 import { tap,catchError } from 'rxjs/operators';
 import { Server } from '../interface/server';
+import { Status } from '../enum/status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,34 @@ export class ServerService {
       catchError(this.handleError)
   );
 
+  filter$ = (status: Status, response: CustomResponse) => <Observable <CustomResponse>>
+  new Observable<CustomResponse>(
+    subscriber => {
+      console.log(response);
+      subscriber.next(
+        // note the terrinaries - where the strings end and start - 
+        status === Status.ALL ? { ...response, message: `Servers filtered by ${status} status` } :
+        { 
+          ...response, 
+          message: response.data.servers
+          .filter( server => server.status === status ).length > 0 ? 
+          `Servers filtered by ${ status === Status.SERVER_UP ? 'SERVER_UP' : 'SERVER_DOWN' } status` : 
+          `No servers of ${status} found`, 
+          data: { 
+            servers: response.data.servers
+            .filter( server => server.status === status) 
+          }
+        } 
+      );
+        subscriber.complete();
+    }
+  )
+  // this.http.get<CustomResponse>(`${this.apiURL}/server/ping/${ipAddress}`) 
+  .pipe(
+      tap(console.log),
+      catchError(this.handleError)
+  );
+
   delete$ = (id: number) => <Observable <CustomResponse>>
   this.http.delete<CustomResponse>(`${this.apiURL}/server/delete/${id}`) 
   .pipe(
@@ -49,5 +78,5 @@ export class ServerService {
     console.log(e);
     return throwError(`An error occurred - Error Code: ${e.status}`);
   };
-  
+
 };
