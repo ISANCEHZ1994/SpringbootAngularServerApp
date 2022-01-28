@@ -1,7 +1,6 @@
 package com.fullstack.server.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.fullstack.server.model.Server;
 
 /**

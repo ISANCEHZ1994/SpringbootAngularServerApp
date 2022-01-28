@@ -17,6 +17,7 @@ import static java.time.LocalDateTime.now;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
@@ -30,7 +31,8 @@ public class ServerResource {
 	private final ServerServiceImpl ss;
 	
 	@GetMapping("/list")
-	public ResponseEntity<Response> getServers(){
+	public ResponseEntity<Response> getServers() throws InterruptedException {		
+		TimeUnit.SECONDS.sleep(3); 		
 		return ResponseEntity.ok(
 					Response.builder()
 							.timeStamp(now())

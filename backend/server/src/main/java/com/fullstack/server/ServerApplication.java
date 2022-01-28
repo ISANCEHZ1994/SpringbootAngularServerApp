@@ -35,7 +35,7 @@ public class ServerApplication {
 		 };
 	 };	 
 	 
-	 @Bean
+	 	@Bean
 		public CorsFilter corsFilter() {
 			UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 			CorsConfiguration corsConfiguration = new CorsConfiguration();

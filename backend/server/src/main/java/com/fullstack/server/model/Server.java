@@ -1,9 +1,12 @@
 package com.fullstack.server.model;
-import com.fullstack.server.enumeration.Status;
 
+import com.fullstack.server.enumeration.Status;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import static javax.persistence.GenerationType.AUTO;
 
 import lombok.AllArgsConstructor;
