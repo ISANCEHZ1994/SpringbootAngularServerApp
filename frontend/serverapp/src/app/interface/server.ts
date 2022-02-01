@@ -9,3 +9,4 @@ export interface Server{
     imageUrl: string;
     status: Status;
 };
+

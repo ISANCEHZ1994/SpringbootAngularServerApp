@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CustomResponse } from '../interface/custom-response';
-import { Observable, Subscriber, throwError } from 'rxjs';
-import { tap,catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { Server } from '../interface/server';
 import { Status } from '../enum/status.enum';
 
@@ -25,6 +25,7 @@ export class ServerService {
       catchError(this.handleError)
   );
   
+  // ============= [ SAVE ] ========================
   save$ = (server: Server) => <Observable <CustomResponse>>
   this.http.post<CustomResponse>(`${this.apiURL}/server/save`, server) // bring the whole server object with all the data
   .pipe(
@@ -50,11 +51,13 @@ export class ServerService {
           ...response, 
           message: response.data.servers
           .filter( server => server.status === status ).length > 0 ? 
-          `Servers filtered by ${ status === Status.SERVER_UP ? 'SERVER_UP' : 'SERVER_DOWN' } status` : 
+          
+          `Servers filtered by 
+          ${ status === Status.SERVER_UP ? 'SERVER_UP' : 'SERVER_DOWN' } status` : 
           `No servers of ${status} found`, 
           data: { 
-            servers: response.data.servers
-            .filter( server => server.status === status) 
+              servers: response.data.servers
+              .filter( server => server.status === status) 
           }
         } 
       );
@@ -67,6 +70,7 @@ export class ServerService {
       catchError(this.handleError)
   );
 
+  // ============= [ DELETE ] ========================
   delete$ = (id: number) => <Observable <CustomResponse>>
   this.http.delete<CustomResponse>(`${this.apiURL}/server/delete/${id}`) 
   .pipe(

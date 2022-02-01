@@ -39,4 +39,5 @@
     <fullyQualifiedTypeName name="com.fullstack.server.model.Server"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
     <fullyQualifiedTypeName name="com.fullstack.server.enumeration.Status"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
 </qualifiedTypeNameHistroy>

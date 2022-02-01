@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Download and install Lombok - https://www.youtube.com/watch?v=gsFPXkYDb-s
+## When using Angular Notifier - https://www.npmjs.com/package/angular-notifier 
+## install like: npm i angular-notifier --legacy-peer-deps [ IN CASE OF ERR DEPS ]
+

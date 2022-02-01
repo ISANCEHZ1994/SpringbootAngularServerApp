@@ -5,3 +5,4 @@ export interface AppState<T>{
     appData?: T; // T meaning any type of Data can pass
     error?: string;
 };
+
